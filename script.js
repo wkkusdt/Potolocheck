@@ -123,6 +123,7 @@
     var ok = document.getElementById("cOk");
     var ni = document.getElementById("contactName");
     var pi = document.getElementById("contactPhone");
+    var mi = document.getElementById("contactMessage");
     var ne = document.getElementById("nameErr");
     var pe = document.getElementById("phoneErr");
     var sb = document.getElementById("cSubmit");
@@ -146,15 +147,29 @@
       if (!ph || !val(ph)) { if (pe) pe.textContent = "Введите корректный номер"; if (pi) pi.classList.add("err"); err = true; }
       if (err) return;
       if (sb) { sb.disabled = true; sb.textContent = "Отправляем..."; }
-      setTimeout(function () {
-        ok.hidden = false;
-        f.reset();
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: n, phone: ph, message: mi ? mi.value.trim() : "" })
+      }).then(function (r) {
+        return r.json();
+      }).then(function (data) {
+        if (data.success) {
+          ok.hidden = false;
+          f.reset();
+        } else {
+          alert("Ошибка отправки. Попробуйте позвонить нам.");
+        }
+      }).catch(function () {
+        alert("Ошибка отправки. Попробуйте позвонить нам.");
+      }).finally(function () {
         if (sb) { sb.disabled = false; sb.textContent = "Отправить заявку"; }
-      }, 800);
+      });
     });
 
     if (ni) ni.addEventListener("input", function () { ni.classList.remove("err"); if (ne) ne.textContent = ""; });
     if (pi) pi.addEventListener("input", function () { pi.classList.remove("err"); if (pe) pe.textContent = ""; });
+    if (mi) mi.addEventListener("input", function () { mi.classList.remove("err"); });
   })();
 
   /* ===== PHONE MASK ===== */
