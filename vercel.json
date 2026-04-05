@@ -1,7 +1,27 @@
 {
   "buildCommand": null,
   "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/page/agreement",
+      "destination": "/agreement",
+      "permanent": true
+    },
+    {
+      "source": "/page/privacy",
+      "destination": "/privacy",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/agreement",
+      "destination": "/agreement.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
