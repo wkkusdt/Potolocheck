@@ -294,19 +294,21 @@ body.dark-theme .marquee { background: #111; }
 .b-card--wide p { margin: 0; }
 
 /* ===== GALLERY ===== */
-.sec-gallery { padding-bottom: 0; }
-.sec-gallery .wrap { margin-bottom: 32px; }
+.sec-gallery { padding: 80px 0; }
+.sec-gallery .wrap { margin-bottom: 48px; }
 
 .g-car {
   position: relative; overflow: hidden;
   border-radius: var(--r-lg);
   background: var(--bg-alt);
   border: 1px solid var(--border);
+  max-width: 820px;
+  margin: 0 auto;
 }
 .g-car__st {
   position: relative;
-  aspect-ratio: 16/9;
-  min-height: 320px;
+  aspect-ratio: 16/10;
+  min-height: 220px;
   overflow: hidden;
 }
 .g-car__sl {
@@ -540,10 +542,11 @@ a.cont-item:hover .cont-item__v { color: var(--gold); }
 .c-form h3 { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 600; margin: 0 0 4px; }
 .c-form > p { margin: 0 0 20px; font-size: 13px; color: var(--text-muted); }
 .c-form__ok {
-  display: flex; align-items: center; gap: 7px;
+  display: none; align-items: center; gap: 7px;
   margin: 14px 0 0; padding: 12px 16px; border-radius: var(--r-sm);
   background: #ecfdf5; color: #065f46; font-size: 13px; font-weight: 600;
 }
+.c-form__ok:not([hidden]) { display: flex; }
 body.dark-theme .c-form__ok { background: rgba(6,95,70,0.15); color: #6ee7b7; }
 
 /* ===== BUTTONS ===== */
