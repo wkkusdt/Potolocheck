@@ -147,10 +147,10 @@
       if (!ph || !val(ph)) { if (pe) pe.textContent = "Введите корректный номер"; if (pi) pi.classList.add("err"); err = true; }
       if (err) return;
       if (sb) { sb.disabled = true; sb.textContent = "Отправляем..."; }
-      fetch("/api/contact", {
+      fetch("/contact.php", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: n, phone: ph, message: mi ? mi.value.trim() : "" })
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "name=" + encodeURIComponent(n) + "&phone=" + encodeURIComponent(ph) + "&message=" + encodeURIComponent(mi ? mi.value.trim() : "")
       }).then(function (r) {
         return r.json();
       }).then(function (data) {

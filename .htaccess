@@ -1,0 +1,24 @@
+Options -Indexes
+DirectoryIndex index.html
+
+RewriteEngine On
+
+# /agreement.html → /agreement (301)
+RewriteCond %{THE_REQUEST} \s/+agreement\.html[\s?] [NC]
+RewriteRule ^ /agreement [R=301,L]
+
+# /agreement → agreement.html (internal rewrite)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^agreement$ agreement.html [L]
+
+# Fallback to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
+
+# Deny .ini files
+<FilesMatch "\.ini$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
